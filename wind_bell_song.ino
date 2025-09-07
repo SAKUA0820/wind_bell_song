@@ -36,15 +36,15 @@ typedef struct {
 } dataDictionary;
 // {NFCのUID, 曲番号}を格納した辞書型
 const dataDictionary songDictionaryArr[]{
-  {"04 84 4B CA 1E 18 90", 1},  //夏祭り
-  {"04 6E 4B CA 1E 18 90", 2},  //打上花火
+  {"04 84 4B CA 1E 18 90", 7},  //夏祭り
+  {"04 6E 4B CA 1E 18 90", 5},  //打上花火
   {"04 52 4B CA 1E 18 90", 3},  //夏色
   {"04 6D 4B CA 1E 18 90", 4},
   {"04 83 4B CA 1E 18 90", 5}
 };
 int sizeOfSongDictionaryArr = 5;
 // 今の曲番号
-int currentNumberOfPlaylist = 1;
+int currentNumberOfPlaylist = 7;
 
 // ソフトシリアルのアサイン
 SoftwareSerial mySoftwareSerial(7, 8); 
@@ -134,7 +134,7 @@ void loop() {
       // 曲を流し、その分だけループを止める
       myDFPlayer.play(currentNumberOfPlaylist);
       Serial.println("sway!!!");
-      delay(6000);
+      delay(7000);
     }
 
     // // プレイヤーの状態を出力
