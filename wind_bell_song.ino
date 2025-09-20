@@ -22,7 +22,7 @@ float preAccelValues[20];
 // 直近20回分の値を格納するためのインデックス
 int accelItr = 0;
 // 「揺れた」と判定するための差分の閾値
-int ACCELL_DIFF_THRESHOLD = 80;
+int ACCELL_DIFF_THRESHOLD = 130;
 
 // RFIDリーダのピンアサイン・MFRCインスタンス生成
 #define RST_PIN         9 
@@ -38,8 +38,8 @@ const dataDictionary songDictionaryArr[]{
   {"04 84 4B CA 1E 18 90", 7},  //夏祭り
   {"04 6E 4B CA 1E 18 90", 5},  //打上花火
   {"04 52 4B CA 1E 18 90", 3},  //夏色
-  {"04 6D 4B CA 1E 18 90", 4},
-  {"04 83 4B CA 1E 18 90", 5}
+  {"04 6D 4B CA 1E 18 90", 1},  // dashi yogi badagga
+  {"04 83 4B CA 1E 18 90", 2}  // hebyone yoin
 };
 int sizeOfSongDictionaryArr = 5;
 // 今の曲番号
@@ -129,10 +129,17 @@ void loop() {
 
     // (今回の値 - 直近20回分の平均値)の絶対値 > 閾値だったら揺れていると判断
     if ((abs(diff) > ACCELL_DIFF_THRESHOLD) && (currentValueSqrt != float(0.0))) {
+
+      // しばらく検知しないように配列を0にする
+      accelItr = 0;
+      for(int i = 0; i < 20; i++){
+        preAccelValues[i] = 0;
+      }
+
       // 曲を流し、その分だけループを止める
       myDFPlayer.play(currentNumberOfPlaylist);
       Serial.println("sway!!!");
-      delay(7000);
+      delay(10000);
     }
 
     // // プレイヤーの状態を出力
