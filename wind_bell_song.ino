@@ -16,7 +16,6 @@
 #include "MFRC522.h"
 #include "Arduino.h";
 #include "DFRobotDFPlayerMini.h";
-#include "SoftwareSerial.h"
 
 // 直近20回分の値を格納する場所
 float preAccelValues[20];
@@ -46,8 +45,7 @@ int sizeOfSongDictionaryArr = 5;
 // 今の曲番号
 int currentNumberOfPlaylist = 7;
 
-// ソフトシリアルのアサイン
-SoftwareSerial mySoftwareSerial(7, 8); 
+// DFRobotDFPlayerMiniの定義
 DFRobotDFPlayerMini myDFPlayer;
 
 void setup() {
@@ -55,12 +53,12 @@ void setup() {
   Serial.begin(115200);
   while (!Serial);  // シリアル準備できるまで何もしない
 
-  // ソフトシリアルの準備
-  mySoftwareSerial.begin(9600);
+  // DFRobotDFPlayerMini用のシリアルの準備
+  Serial1.begin(9600);
 
   // DFRobotDFPlayerMiniの準備
   Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
-  if (!myDFPlayer.begin(mySoftwareSerial)) {
+  if (!myDFPlayer.begin(Serial1)) {
     // 2秒以内に初期化できなかった場合はエラーメッセージを表示
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
