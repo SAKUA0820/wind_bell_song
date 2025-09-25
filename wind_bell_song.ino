@@ -22,7 +22,7 @@ float preAccelValues[20];
 // 直近20回分の値を格納するためのインデックス
 int accelItr = 0;
 // 「揺れた」と判定するための差分の閾値
-int ACCELL_DIFF_THRESHOLD = 130;
+int ACCELL_DIFF_THRESHOLD = 160;
 
 // RFIDリーダのピンアサイン・MFRCインスタンス生成
 #define RST_PIN         9 
@@ -37,9 +37,9 @@ typedef struct {
 const dataDictionary songDictionaryArr[]{
   {"04 84 4B CA 1E 18 90", 7},  //夏祭り
   {"04 6E 4B CA 1E 18 90", 5},  //打上花火
-  {"04 52 4B CA 1E 18 90", 3},  //夏色
-  {"04 6D 4B CA 1E 18 90", 1},  // dashi yogi badagga
-  {"04 83 4B CA 1E 18 90", 2}  // hebyone yoin
+  {"04 52 4B CA 1E 18 90", 11},  //夏色
+  {"04 6D 4B CA 1E 18 90", 13},  // dashi yogi badagga
+  {"04 83 4B CA 1E 18 90", 15}  // hebyone yoin
 };
 int sizeOfSongDictionaryArr = 5;
 // 今の曲番号
